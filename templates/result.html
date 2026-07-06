@@ -11,6 +11,7 @@
     <h1>🤖 AI Resume Analyzer</h1>
 
     <div class="card">
+
         <h2>ATS Score</h2>
 
         <div class="progress">
@@ -18,31 +19,52 @@
                 {{ score }}%
             </div>
         </div>
+
     </div>
 
     <div class="card">
-        <h2>Skills Found</h2>
+
+        <h2>✅ Skills Found</h2>
 
         {% if skills %}
-
             {% for skill in skills %}
                 <span class="skill">{{ skill }}</span>
             {% endfor %}
-
         {% else %}
-
-            <p>No Skills Detected</p>
-
+            <p>No Skills Found</p>
         {% endif %}
+
     </div>
 
     <div class="card">
-        <h2>Resume Preview</h2>
 
-        <pre>{{ text }}</pre>
+        <h2>❌ Missing Skills</h2>
+
+        {% for skill in missing_skills %}
+            <span class="missing">{{ skill }}</span>
+        {% endfor %}
+
     </div>
 
-    <br>
+    <div class="card">
+
+        <h2>💼 Recommended Jobs</h2>
+
+        <ul>
+        {% for job in jobs %}
+            <li>{{ job }}</li>
+        {% endfor %}
+        </ul>
+
+    </div>
+
+    <div class="card">
+
+        <h2>📄 Resume Preview</h2>
+
+        <pre>{{ text }}</pre>
+
+    </div>
 
     <a href="/">
         <button>Analyze Another Resume</button>
