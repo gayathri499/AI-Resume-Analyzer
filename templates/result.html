@@ -4,11 +4,13 @@
 
 <div class="row">
 
-    <div class="col-lg-12">
+    <div class="col-md-4">
 
-        <div class="card shadow p-4 mb-4">
+        <div class="card shadow text-center p-4 mb-4">
 
-            <h2 class="text-primary">📊 ATS Score</h2>
+            <h2 class="text-primary">ATS Score</h2>
+
+            <h1 class="display-2 text-success">{{ score }}%</h1>
 
             <div class="progress mt-3">
 
@@ -25,8 +27,19 @@
 
     </div>
 
-</div>
+    <div class="col-md-8">
 
+        <div class="card shadow p-4 mb-4">
+
+            <h2 class="text-primary">Skills Overview</h2>
+
+            <canvas id="skillChart"></canvas>
+
+        </div>
+
+    </div>
+
+</div>
 
 <div class="row">
 
@@ -42,18 +55,13 @@
 
 {% for skill in skills %}
 
-<span class="skill">
-
-{{ skill }}
-
-</span>
+<span class="skill">{{ skill }}</span>
 
 {% endfor %}
 
 </div>
 
 </div>
-
 
 <div class="col-md-6">
 
@@ -67,11 +75,7 @@
 
 {% for skill in missing_skills %}
 
-<span class="missing">
-
-{{ skill }}
-
-</span>
+<span class="missing">{{ skill }}</span>
 
 {% endfor %}
 
@@ -80,7 +84,6 @@
 </div>
 
 </div>
-
 
 <div class="card shadow p-4 mb-4">
 
@@ -94,17 +97,13 @@
 
 {% for job in jobs %}
 
-<div class="col-md-4">
+<div class="col-md-4 mb-3">
 
-<div class="card border-primary mb-3">
+<div class="card border-primary h-100">
 
-<div class="card-body">
+<div class="card-body text-center">
 
-<h5>
-
-{{ job }}
-
-</h5>
+<h5>{{ job }}</h5>
 
 </div>
 
@@ -118,7 +117,6 @@
 
 </div>
 
-
 <div class="card shadow p-4">
 
 <h3 class="text-primary">
@@ -127,27 +125,60 @@
 
 </h3>
 
-<pre>
-
-{{ text }}
-
-</pre>
+<pre>{{ text }}</pre>
 
 </div>
 
-
 <div class="text-center mt-4">
 
-<a href="/">
-
-<button class="btn btn-primary btn-lg">
+<a href="/" class="btn btn-primary btn-lg">
 
 Analyze Another Resume
-
-</button>
 
 </a>
 
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+const ctx = document.getElementById('skillChart');
+
+new Chart(ctx, {
+
+type:'doughnut',
+
+data:{
+
+labels:['Skills Found','Missing Skills'],
+
+datasets:[{
+
+data:[{{ skills|length }}, {{ missing_skills|length }}]
+
+}]
+
+},
+
+options:{
+
+responsive:true,
+
+plugins:{
+
+legend:{
+
+position:'bottom'
+
+}
+
+}
+
+}
+
+});
+
+</script>
 
 {% endblock %}

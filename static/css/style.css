@@ -8,55 +8,40 @@ body{
 }
 
 .progress{
-    height:30px;
+    height:28px;
     border-radius:20px;
 }
 
 .progress-bar{
-    font-size:16px;
+    font-size:15px;
     font-weight:bold;
 }
 
 .skill{
-
-display:inline-block;
-
-padding:10px 16px;
-
-margin:6px;
-
-background:#198754;
-
-color:white;
-
-border-radius:30px;
-
-font-weight:bold;
-
+    display:inline-block;
+    background:#198754;
+    color:white;
+    padding:8px 15px;
+    border-radius:25px;
+    margin:5px;
 }
 
 .missing{
-
-display:inline-block;
-
-padding:10px 16px;
-
-margin:6px;
-
-background:#dc3545;
-
-color:white;
-
-border-radius:30px;
-
-font-weight:bold;
-
+    display:inline-block;
+    background:#dc3545;
+    color:white;
+    padding:8px 15px;
+    border-radius:25px;
+    margin:5px;
 }
 
 pre{
+    white-space:pre-wrap;
+    font-size:14px;
+    max-height:300px;
+    overflow:auto;
+}
 
-white-space:pre-wrap;
-
-font-size:14px;
-
+canvas{
+    max-height:300px;
 }
