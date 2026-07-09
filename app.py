@@ -29,7 +29,7 @@ def upload():
 
     found_skills, missing_skills = extract_skills(text)
 
-    score = calculate_ats_score(found_skills)
+    score = calculate_ats_score(found_skills, text)
 
     jobs = recommend_jobs(found_skills)
 

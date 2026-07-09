@@ -1,10 +1,29 @@
 from utils.skill_extractor import ALL_SKILLS
 
+def calculate_ats_score(found_skills, resume_text):
 
-def calculate_ats_score(found_skills):
+    score = 0
 
-    total_skills = len(ALL_SKILLS)
+    # Skill Score (60 Marks)
+    skill_score = int((len(found_skills) / len(ALL_SKILLS)) * 60)
+    score += skill_score
 
-    score = int((len(found_skills) / total_skills) * 100)
+    text = resume_text.lower()
 
-    return score
+    # Education
+    if "b.tech" in text or "b.e" in text or "bachelor" in text:
+        score += 10
+
+    # Projects
+    if "project" in text:
+        score += 10
+
+    # Internship / Experience
+    if "intern" in text or "experience" in text:
+        score += 10
+
+    # Certifications
+    if "certificate" in text or "certification" in text:
+        score += 10
+
+    return min(score, 100)

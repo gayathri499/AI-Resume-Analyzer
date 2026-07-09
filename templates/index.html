@@ -4,42 +4,47 @@
 
 <div class="card shadow-lg p-5">
 
-<h1 class="text-center text-primary">
+    <h1 class="text-center text-primary mb-4">
+        🤖 AI Resume Analyzer Pro
+    </h1>
 
-Upload Your Resume
+    <form action="/upload" method="POST" enctype="multipart/form-data">
 
-</h1>
+        <div class="mb-4">
+            <label class="form-label fw-bold">
+                Upload Resume (PDF)
+            </label>
 
-<form action="/upload" method="POST" enctype="multipart/form-data">
+            <input
+                type="file"
+                class="form-control"
+                name="resume"
+                accept=".pdf"
+                required>
+        </div>
 
-<div class="mb-3">
+        <div class="mb-4">
+            <label class="form-label fw-bold">
+                Paste Job Description
+            </label>
 
-<label class="form-label">
+            <textarea
+                class="form-control"
+                name="job_description"
+                rows="8"
+                placeholder="Paste the Job Description here..."
+                required></textarea>
+        </div>
 
-Choose Resume (PDF)
+        <div class="d-grid">
 
-</label>
+            <button class="btn btn-primary btn-lg">
+                Analyze Resume
+            </button>
 
-<input
-type="file"
-class="form-control"
-name="resume"
-accept=".pdf"
-required>
+        </div>
 
-</div>
-
-<div class="d-grid">
-
-<button class="btn btn-primary btn-lg">
-
-Analyze Resume
-
-</button>
-
-</div>
-
-</form>
+    </form>
 
 </div>
 
