@@ -1,76 +1,153 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Resume Analysis</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
+{% extends "base.html" %}
 
-<div class="container">
+{% block content %}
 
-    <h1>🤖 AI Resume Analyzer</h1>
+<div class="row">
 
-    <div class="card">
+    <div class="col-lg-12">
 
-        <h2>ATS Score</h2>
+        <div class="card shadow p-4 mb-4">
 
-        <div class="progress">
-            <div class="progress-bar" style="width: {{ score }}%;">
-                {{ score }}%
+            <h2 class="text-primary">📊 ATS Score</h2>
+
+            <div class="progress mt-3">
+
+                <div class="progress-bar bg-success"
+                     style="width: {{ score }}%;">
+
+                    {{ score }}%
+
+                </div>
+
             </div>
+
         </div>
 
     </div>
 
-    <div class="card">
+</div>
 
-        <h2>✅ Skills Found</h2>
 
-        {% if skills %}
-            {% for skill in skills %}
-                <span class="skill">{{ skill }}</span>
-            {% endfor %}
-        {% else %}
-            <p>No Skills Found</p>
-        {% endif %}
+<div class="row">
 
-    </div>
+<div class="col-md-6">
 
-    <div class="card">
+<div class="card shadow p-4 mb-4">
 
-        <h2>❌ Missing Skills</h2>
+<h3 class="text-success">
 
-        {% for skill in missing_skills %}
-            <span class="missing">{{ skill }}</span>
-        {% endfor %}
+✅ Skills Found
 
-    </div>
+</h3>
 
-    <div class="card">
+{% for skill in skills %}
 
-        <h2>💼 Recommended Jobs</h2>
+<span class="skill">
 
-        <ul>
-        {% for job in jobs %}
-            <li>{{ job }}</li>
-        {% endfor %}
-        </ul>
+{{ skill }}
 
-    </div>
+</span>
 
-    <div class="card">
-
-        <h2>📄 Resume Preview</h2>
-
-        <pre>{{ text }}</pre>
-
-    </div>
-
-    <a href="/">
-        <button>Analyze Another Resume</button>
-    </a>
+{% endfor %}
 
 </div>
 
-</body>
-</html>
+</div>
+
+
+<div class="col-md-6">
+
+<div class="card shadow p-4 mb-4">
+
+<h3 class="text-danger">
+
+❌ Missing Skills
+
+</h3>
+
+{% for skill in missing_skills %}
+
+<span class="missing">
+
+{{ skill }}
+
+</span>
+
+{% endfor %}
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card shadow p-4 mb-4">
+
+<h3 class="text-primary">
+
+💼 Recommended Jobs
+
+</h3>
+
+<div class="row">
+
+{% for job in jobs %}
+
+<div class="col-md-4">
+
+<div class="card border-primary mb-3">
+
+<div class="card-body">
+
+<h5>
+
+{{ job }}
+
+</h5>
+
+</div>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</div>
+
+
+<div class="card shadow p-4">
+
+<h3 class="text-primary">
+
+📄 Resume Preview
+
+</h3>
+
+<pre>
+
+{{ text }}
+
+</pre>
+
+</div>
+
+
+<div class="text-center mt-4">
+
+<a href="/">
+
+<button class="btn btn-primary btn-lg">
+
+Analyze Another Resume
+
+</button>
+
+</a>
+
+</div>
+
+{% endblock %}

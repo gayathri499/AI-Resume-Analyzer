@@ -1,25 +1,46 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>AI Resume Analyzer</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
+{% extends "base.html" %}
 
-<div class="container">
-    <h1>🤖 AI Resume Analyzer</h1>
+{% block content %}
 
-    <p>
-        Upload your resume and get
-        ATS Score, Skill Analysis and Job Recommendations.
-    </p>
+<div class="card shadow-lg p-5">
 
-    <form action="/upload" method="POST" enctype="multipart/form-data">
-    <input type="file" name="resume" accept=".pdf" required>
-    <br><br>
-    <button type="submit">Upload Resume</button>
-</form>
+<h1 class="text-center text-primary">
+
+Upload Your Resume
+
+</h1>
+
+<form action="/upload" method="POST" enctype="multipart/form-data">
+
+<div class="mb-3">
+
+<label class="form-label">
+
+Choose Resume (PDF)
+
+</label>
+
+<input
+type="file"
+class="form-control"
+name="resume"
+accept=".pdf"
+required>
+
 </div>
 
-</body>
-</html>
+<div class="d-grid">
+
+<button class="btn btn-primary btn-lg">
+
+Analyze Resume
+
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,62 @@
+body{
+    background:#eef4ff;
+}
+
+.card{
+    border:none;
+    border-radius:18px;
+}
+
+.progress{
+    height:30px;
+    border-radius:20px;
+}
+
+.progress-bar{
+    font-size:16px;
+    font-weight:bold;
+}
+
+.skill{
+
+display:inline-block;
+
+padding:10px 16px;
+
+margin:6px;
+
+background:#198754;
+
+color:white;
+
+border-radius:30px;
+
+font-weight:bold;
+
+}
+
+.missing{
+
+display:inline-block;
+
+padding:10px 16px;
+
+margin:6px;
+
+background:#dc3545;
+
+color:white;
+
+border-radius:30px;
+
+font-weight:bold;
+
+}
+
+pre{
+
+white-space:pre-wrap;
+
+font-size:14px;
+
+}
