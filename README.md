@@ -133,7 +133,7 @@ Add screenshots here after capturing them.
 
 GitHub: https://github.com/gayathri499
 
-LinkedIn: *(Add your LinkedIn profile link here.)*
+LinkedIn: https://www.linkedin.com/in/srigayathri-m-293ba22ba/
 
 ---
 
