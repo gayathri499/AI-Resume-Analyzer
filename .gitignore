@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+
+# Virtual Environment
+.venv/
+
+# Database
+*.db
+
+# Uploaded files
+uploads/
+
+# Generated reports
+reports/
+
+# VS Code
+.vscode/
+
+# Environment variables
+.env

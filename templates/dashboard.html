@@ -1,0 +1,284 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-4 fade-up">
+
+    <div class="row">
+
+        <div class="col-md-12 text-center">
+
+            <h2 class="text-primary fw-bold">
+                🤖 AI Resume Analyzer Dashboard
+            </h2>
+
+            <p class="text-muted">
+                Welcome, {{ user["username"] }}
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- Statistics -->
+
+    <div class="row mt-4">
+
+        <div class="col-md-4">
+
+            <div class="card shadow text-center">
+
+                <div class="card-body">
+
+                    <h5>Total Resumes</h5>
+
+                    <h2 class="text-primary">
+
+                        {{ total_resumes }}
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card shadow text-center">
+
+                <div class="card-body">
+
+                    <h5>Average ATS</h5>
+
+                    <h2 class="text-success">
+
+                        {{ average_ats }}%
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card shadow text-center">
+
+                <div class="card-body">
+
+                    <h5>User</h5>
+
+                    <h5>
+
+                        {{ user["email"] }}
+
+                    </h5>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Upload Resume -->
+
+    <div class="card shadow mt-4">
+
+        <div class="card-header bg-primary text-white">
+
+            <h4>Upload Resume</h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <form action="/upload"
+                  method="POST"
+                  enctype="multipart/form-data">
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+
+                        Resume (PDF)
+
+                    </label>
+
+                    <input
+                        type="file"
+                        name="resume"
+                        class="form-control"
+                        required>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+
+                        Job Description
+
+                    </label>
+
+                    <textarea
+                        name="job_description"
+                        class="form-control"
+                        rows="7"
+                        placeholder="Paste Job Description Here..."
+                        required></textarea>
+
+                </div>
+
+                <button
+                    class="btn btn-primary w-100">
+
+                    Analyze Resume
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <!-- ATS Chart -->
+
+    <div class="row mt-4">
+
+        <div class="col-md-6">
+
+            <div class="card shadow">
+
+                <div class="card-header bg-success text-white">
+
+                    <h4>📊 ATS Performance</h4>
+
+                </div>
+
+                <div class="card-body">
+
+                    <canvas id="atsChart"></canvas>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-6">
+
+            <div class="card shadow">
+
+                <div class="card-header bg-info text-white">
+
+                    <h4>Quick Actions</h4>
+
+                </div>
+
+                <div class="card-body">
+
+                    <a href="/history"
+                       class="btn btn-success w-100 mb-2">
+
+                        Resume History
+
+                    </a>
+
+                    <a href="/profile"
+                       class="btn btn-primary w-100 mb-2">
+
+                        My Profile
+
+                    </a>
+
+                    <a href="/logout"
+                       class="btn btn-danger w-100">
+
+                        Logout
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- History -->
+
+    <div class="card shadow mt-4">
+
+        <div class="card-header bg-dark text-white">
+
+            <h4>Recent Resume Analysis</h4>
+
+        </div>
+
+        <div class="card-body">
+
+            {% if history %}
+
+            <table class="table table-striped">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Resume</th>
+                        <th>ATS</th>
+                        <th>JD Match</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                {% for item in history %}
+
+                    <tr>
+
+                        <td>{{ item.filename }}</td>
+
+                        <td>{{ item.ats_score }}%</td>
+
+                        <td>{{ item.match_score }}%</td>
+
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+            {% else %}
+
+            <p>No resume analyzed yet.</p>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+const averageATS={{ average_ats }};
+</script>
+
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+
+{% endblock %}
+

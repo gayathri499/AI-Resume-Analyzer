@@ -2,183 +2,223 @@
 
 {% block content %}
 
+<div class="container mt-4">
+
+```
+<h2 class="text-center text-primary fw-bold mb-4">
+    📄 AI Resume Analysis Report
+</h2>
+
+<!-- ATS Score & JD Match -->
 <div class="row">
 
-    <div class="col-md-4">
+    <div class="col-md-6">
+        <div class="card shadow-lg border-0 mb-4">
+            <div class="card-body text-center">
+                <h4>📊 ATS Score</h4>
+                <h1 class="display-4 text-success">{{ score }}%</h1>
 
-        <div class="card shadow text-center p-4 mb-4">
-
-            <h2 class="text-primary">ATS Score</h2>
-
-            <h1 class="display-2 text-success">{{ score }}%</h1>
-
-            <div class="progress mt-3">
-
-                <div class="progress-bar bg-success"
-                     style="width: {{ score }}%;">
-
-                    {{ score }}%
-
+                <div class="progress mt-3" style="height:25px;">
+                    <div class="progress-bar bg-success"
+                         role="progressbar"
+                         style="width: {{ score }}%;">
+                        {{ score }}%
+                    </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card shadow-lg border-0 mb-4">
+            <div class="card-body text-center">
+                <h4>🎯 Job Description Match</h4>
+                <h1 class="display-4 text-info">{{ match_score }}%</h1>
+
+                <div class="progress mt-3" style="height:25px;">
+                    <div class="progress-bar bg-info"
+                         role="progressbar"
+                         style="width: {{ match_score }}%;">
+                        {{ match_score }}%
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Skills -->
+<div class="row">
+
+    <div class="col-md-6">
+        <div class="card shadow mb-4">
+
+            <div class="card-header bg-success text-white">
+                <h4>✅ Skills Found</h4>
+            </div>
+
+            <div class="card-body">
+
+                {% if skills %}
+
+                    {% for skill in skills %}
+                        <span class="badge bg-success p-2 m-1">
+                            {{ skill }}
+                        </span>
+                    {% endfor %}
+
+                {% else %}
+
+                    <p>No skills found.</p>
+
+                {% endif %}
 
             </div>
 
         </div>
-
     </div>
 
-    <div class="col-md-8">
+    <div class="col-md-6">
+        <div class="card shadow mb-4">
 
-        <div class="card shadow p-4 mb-4">
+            <div class="card-header bg-danger text-white">
+                <h4>❌ Missing Skills</h4>
+            </div>
 
-            <h2 class="text-primary">Skills Overview</h2>
+            <div class="card-body">
 
-            <canvas id="skillChart"></canvas>
+                {% if missing_skills %}
+
+                    {% for skill in missing_skills %}
+                        <span class="badge bg-danger p-2 m-1">
+                            {{ skill }}
+                        </span>
+                    {% endfor %}
+
+                {% else %}
+
+                    <p>No missing skills.</p>
+
+                {% endif %}
+
+            </div>
 
         </div>
+    </div>
+
+</div>
+
+<!-- AI Suggestions -->
+<div class="card shadow mb-4">
+
+    <div class="card-header bg-warning">
+        <h4>🤖 AI Resume Suggestions</h4>
+    </div>
+
+    <div class="card-body">
+
+        <ul class="list-group">
+
+            {% for item in feedback %}
+                <li class="list-group-item">
+                    ✅ {{ item }}
+                </li>
+            {% endfor %}
+
+        </ul>
 
     </div>
 
 </div>
 
-<div class="row">
+<!-- Recommended Jobs -->
+<div class="card shadow mb-4">
 
-<div class="col-md-6">
+    <div class="card-header bg-primary text-white">
+        <h4>💼 Recommended Jobs</h4>
+    </div>
 
-<div class="card shadow p-4 mb-4">
+    <div class="card-body">
 
-<h3 class="text-success">
+        {% if jobs %}
 
-✅ Skills Found
+            {% for job in jobs %}
+                <div class="alert alert-primary">
+                    ⭐ {{ job }}
+                </div>
+            {% endfor %}
 
-</h3>
+        {% else %}
 
-{% for skill in skills %}
+            <p>No job recommendations available.</p>
 
-<span class="skill">{{ skill }}</span>
+        {% endif %}
 
-{% endfor %}
-
-</div>
-
-</div>
-
-<div class="col-md-6">
-
-<div class="card shadow p-4 mb-4">
-
-<h3 class="text-danger">
-
-❌ Missing Skills
-
-</h3>
-
-{% for skill in missing_skills %}
-
-<span class="missing">{{ skill }}</span>
-
-{% endfor %}
+    </div>
 
 </div>
 
-</div>
+<!-- Resume Preview -->
+<div class="card shadow mb-4">
+
+    <div class="card-header bg-dark text-white">
+        <h4>📄 Resume Preview</h4>
+    </div>
+
+    <div class="card-body">
+
+        <iframe
+            src="{{ url_for('uploaded_file', filename=pdf_file) }}"
+            width="100%"
+            height="700"
+            style="border:1px solid #ddd;">
+        </iframe>
+
+    </div>
 
 </div>
 
-<div class="card shadow p-4 mb-4">
+<!-- Extracted Resume Text -->
+<div class="card shadow mb-4">
 
-<h3 class="text-primary">
+    <div class="card-header bg-secondary text-white">
+        <h4>📃 Extracted Resume Text</h4>
+    </div>
 
-💼 Recommended Jobs
+    <div class="card-body">
 
-</h3>
+        <textarea
+            class="form-control"
+            rows="12"
+            readonly>{{ text }}</textarea>
 
-<div class="row">
-
-{% for job in jobs %}
-
-<div class="col-md-4 mb-3">
-
-<div class="card border-primary h-100">
-
-<div class="card-body text-center">
-
-<h5>{{ job }}</h5>
+    </div>
 
 </div>
 
-</div>
+<!-- Buttons -->
+<div class="text-center mb-5">
+
+    <a href="/download" class="btn btn-success btn-lg me-2">
+        📥 Download PDF Report
+    </a>
+
+    <a href="/dashboard" class="btn btn-primary btn-lg me-2">
+        🔄 Analyze Another Resume
+    </a>
+
+    <a href="/history" class="btn btn-info btn-lg me-2">
+        📜 History
+    </a>
+
+    <a href="/profile" class="btn btn-dark btn-lg">
+        👤 Profile
+    </a>
 
 </div>
-
-{% endfor %}
-
-</div>
+```
 
 </div>
-
-<div class="card shadow p-4">
-
-<h3 class="text-primary">
-
-📄 Resume Preview
-
-</h3>
-
-<pre>{{ text }}</pre>
-
-</div>
-
-<div class="text-center mt-4">
-
-<a href="/" class="btn btn-primary btn-lg">
-
-Analyze Another Resume
-
-</a>
-
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<script>
-
-const ctx = document.getElementById('skillChart');
-
-new Chart(ctx, {
-
-type:'doughnut',
-
-data:{
-
-labels:['Skills Found','Missing Skills'],
-
-datasets:[{
-
-data:[{{ skills|length }}, {{ missing_skills|length }}]
-
-}]
-
-},
-
-options:{
-
-responsive:true,
-
-plugins:{
-
-legend:{
-
-position:'bottom'
-
-}
-
-}
-
-}
-
-});
-
-</script>
 
 {% endblock %}
