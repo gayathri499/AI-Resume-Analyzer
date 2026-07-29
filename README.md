@@ -137,6 +137,4 @@ LinkedIn: https://www.linkedin.com/in/srigayathri-m-293ba22ba/
 
 ---
 
-## ⭐ If you like this project
 
-Please consider giving this repository a ⭐ on GitHub.
